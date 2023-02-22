@@ -9,7 +9,6 @@ const NewsPage = () => {
   const [searchInputText, setSearchInputText] = useState("");
   const [newsList, setNewsList] = useState([]);
   const handleSearchInputChange = (e) => {
-    // 변경될 화면에 보여질 데이터들
     const { value } = e.target; // e - 해당 이벤트 객체 전체를 불러옴
     setSearchInputText(value);
     console.log(value);
@@ -23,7 +22,7 @@ const NewsPage = () => {
       // axios 서버 통신, 응답받은 데이터를 확인
       console.log(data.articles); // 응답받은 데이터에서 'articles' 영역을 추출
       const articles = data.articles;
-      setNewsList(articles); // articles를 배열로 세팅
+      setNewsList(articles);
     });
   };
   return (
