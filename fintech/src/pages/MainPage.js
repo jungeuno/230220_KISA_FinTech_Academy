@@ -10,6 +10,8 @@ const MainPage = () => {
     getAccountList();
   }, []);
 
+  const [accountList, setAcccountList] = useState([]);
+
   const getAccountList = () => {
     const accessToken = localStorage.getItem("accessToken");
     const userSeqNo = localStorage.getItem("userSeqNo");
@@ -17,35 +19,35 @@ const MainPage = () => {
     //axios 요청을 작성해야함
     //header 설정
     const option = {
-      method: "",
-      url: "",
+      // 계좌 내역 조회 api 요청
+      method: "GET",
+      url: "/v2.0/user/me",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      params: {},
+      params: {
+        user_seq_no: userSeqNo,
+      },
     };
+
+    axios(option).then(({ data }) => {
+      console.log(data);
+      setAcccountList(data.res_list); // 계좌 내역 조회에서 계좌 정보들을 추출
+    });
   };
-
-  // const [data, setData] = useState();
-
-  // const handleClick = () => {
-  //   console.log("서버로 요청을 보냅니다.");
-  //   const requestUrl =
-  //     "https://testapi.openbanking.or.kr/v2.0/user/me?user_seq_no=1101022012";
-  //   axios.get(requestUrl).then((response) => {
-  //     // axios 서버 통신
-  //     console.log(response);
-  //     setData(response.data);
-  //   });
-  // };
 
   return (
     <div>
       <AppHeader title={"계좌 목록"}></AppHeader>
-      <MainAccountCard
-        bankName={"테스트"}
-        fintechUseNo={"24123123"}
-      ></MainAccountCard>
+      {accountList.map((data) => {
+        return (
+          <MainAccountCard
+            key={data.fintech_use_num}
+            bankName={data.bank_name}
+            fintechUseNo={data.fintech_use_num}
+          ></MainAccountCard>
+        );
+      })}
     </div>
   );
 };

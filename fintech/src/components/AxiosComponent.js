@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const AxiosComponent = () => {
+  // 데이터 동신
   const [data, setData] = useState();
 
   const handleClick = () => {
