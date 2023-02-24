@@ -6,8 +6,8 @@ import Modal from "react-modal";
 
 const QrReaderPage = () => {
   // 큐알코드 리더기 기능
-  const [data, setData] = useState("No result");
-  const [openModal, setOpenModal] = useState(false); //no camera : true
+  const [data, setData] = useState("120230040288951020830774");
+  const [openModal, setOpenModal] = useState(true); //no camera : true
   const CustomStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.7)",
